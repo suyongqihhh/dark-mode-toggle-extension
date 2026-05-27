@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark Mode Toggle</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 280px;
+      min-height: 180px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+      color: #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 16px 16px;
+      user-select: none;
+    }
+
+    /* 标题 */
+    .title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #a0b4ff;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+    }
+
+    /* 开关容器 */
+    .toggle-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    /* 自定义开关 */
+    .switch {
+      position: relative;
+      width: 72px;
+      height: 36px;
+      cursor: pointer;
+    }
+    .switch input { display: none; }
+    .slider {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #2a3a5c, #1e2a45);
+      border-radius: 18px;
+      border: 2px solid #3a4a6c;
+      transition: all 0.35s ease;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
+    }
+    .slider::before {
+      content: "☀️";
+      position: absolute;
+      height: 28px;
+      width: 28px;
+      left: 4px;
+      bottom: 2px;
+      background: #fff;
+      border-radius: 50%;
+      transition: all 0.35s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    .switch input:checked + .slider {
+      background: linear-gradient(135deg, #4a3aff, #7c5cfc);
+      border-color: #6a5afc;
+      box-shadow: 0 0 16px rgba(100,80,255,0.4);
+    }
+    .switch input:checked + .slider::before {
+      transform: translateX(34px);
+      content: "🌙";
+    }
+
+    .status-text {
+      font-size: 13px;
+      color: #a0a0b0;
+      transition: color 0.3s;
+    }
+    .status-text.on { color: #a0b4ff; }
+
+    /* 快捷网站按钮 */
+    .sites {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 4px;
+    }
+    .site-btn {
+      padding: 5px 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      color: #a0a0b0;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .site-btn:hover {
+      background: rgba(100,80,255,0.2);
+      border-color: #6a5afc;
+      color: #c0c8ff;
+    }
+
+    /* 底部链接 */
+    .footer {
+      margin-top: auto;
+      padding-top: 12px;
+      font-size: 11px;
+      color: #5a5a6a;
+    }
+    .footer a { color: #5a7aac; text-decoration: none; }
+    .footer a:hover { color: #7aaaff; }
+  </style>
+</head>
+<body>
+  <div class="title">🌓 Dark Mode Toggle Pro</div>
+
+  <div class="toggle-wrap">
+    <label class="switch">
+      <input type="checkbox" id="toggle">
+      <span class="slider"></span>
+    </label>
+    <div class="status-text" id="statusText">浅色模式</div>
+  </div>
+
+  <div class="sites">
+    <span class="site-btn" data-url="https://www.baidu.com">百度</span>
+    <span class="site-btn" data-url="https://github.com">GitHub</span>
+    <span class="site-btn" data-url="https://www.zhihu.com">知乎</span>
+    <span class="site-btn" data-url="https://www.bilibili.com">B站</span>
+  </div>
+
+  <div class="footer">
+    v1.0.0 · <a href="#" id="shortcutLink">快捷键: Ctrl+Shift+D</a>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
